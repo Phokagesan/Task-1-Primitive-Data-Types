@@ -4,45 +4,43 @@ pragma solidity >=0.8.0 <0.9.0;
 import "../node_modules/hardhat/console.sol";
 // import "@openzeppelin/contracts/access/Ownable.sol"; 
 // https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol
-// I'm having a punt here that we have to think that we are the teacher of the class marking work and storing student records. 
-// Info that does not need to be public should be private for security
+
 
 contract StudentGrade {
-
+    // 5. Create stuct with student details
     struct StudentProfile {
         address studentId;
         uint8 totalMarks;
         uint8 percentage;
     }
-
-    address private _owner;
+    // 1. Make owner state var public
+    address public _owner;
     address public listOfStudents;
 
-    
+    // 2. Create mapping of students
     mapping(address => StudentProfile) studentIdMap;
 
     
-    
+    // 3. Create constructor owner = msg.sender
     constructor() {
         owner = msg.sender;
     }
 
+    // 4. Create onlyOwner modifier
     modifier onlyOwner() {
         require(msg.sender == owner, "Not owner");
         _;
     }
-    
 
-    function setNewOwner(address _newOwner) external onlyOwner {
-        require(_newOwner != address(0), "Invalid address");
-        owner = _newOwner;
+    modifier checkDuplicate(address _addr) {
+        require(_addr != address(0), "Student already registered");
+    _;
     }
+    
 
     function saveStudentMark(uint _totalMarks, uint percentage) external {
-        require
+        
     }
-    sdfsd
+    // Make sure student cannot register twice
 
-
-    
 };
